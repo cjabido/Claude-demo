@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="card">
+    <h1>{{ title }}</h1>
+    <p class="subtitle">Full Stack Test Application</p>
+
+    <!-- Status Section -->
+    <div class="section">
+      <h2>System Status</h2>
+      <div *ngIf="statusInfo" class="status-info">
+        <div class="status-item">
+          <span class="label">Backend:</span>
+          <span class="value success">{{ statusInfo.backend }}</span>
+        </div>
+        <div class="status-item">
+          <span class="label">Status:</span>
+          <span class="value success">{{ statusInfo.status }}</span>
+        </div>
+        <div class="status-item">
+          <span class="label">Java Version:</span>
+          <span class="value">{{ statusInfo.javaVersion }}</span>
+        </div>
+        <div class="status-item">
+          <span class="label">Spring Boot:</span>
+          <span class="value">{{ statusInfo.springBootVersion }}</span>
+        </div>
+      </div>
+      <button (click)="loadBackendStatus()" [disabled]="loading" class="btn btn-secondary">
+        Refresh Status
+      </button>
+    </div>
+
+    <!-- Hello World Test -->
+    <div class="section">
+      <h2>Backend Connection Test</h2>
+      <button (click)="testConnection()" [disabled]="loading" class="btn btn-primary">
+        Test Backend Connection
+      </button>
+      <div *ngIf="backendMessage" class="message success-message">
+        {{ backendMessage }}
+      </div>
+    </div>
+
+    <!-- Interactive Echo Test -->
+    <div class="section">
+      <h2>Interactive Backend Test</h2>
+      <div class="input-group">
+        <input
+          type="text"
+          [(ngModel)]="userMessage"
+          placeholder="Type a message..."
+          (keyup.enter)="sendMessage()"
+          [disabled]="loading"
+          class="input-field">
+        <button (click)="sendMessage()" [disabled]="loading || !userMessage.trim()" class="btn btn-primary">
+          Send to Backend
+        </button>
+      </div>
+      <div *ngIf="echoResponse" class="message info-message">
+        {{ echoResponse }}
+      </div>
+    </div>
+
+    <!-- Error Display -->
+    <div *ngIf="error" class="message error-message">
+      {{ error }}
+    </div>
+
+    <!-- Loading Indicator -->
+    <div *ngIf="loading" class="loading">
+      <div class="spinner"></div>
+      <span>Loading...</span>
+    </div>
+
+    <!-- Technology Info -->
+    <div class="section tech-info">
+      <h3>Technologies Verified:</h3>
+      <ul>
+        <li>✓ Node.js & npm</li>
+        <li>✓ Angular 17</li>
+        <li>✓ Java (Spring Boot)</li>
+        <li>✓ REST API Communication</li>
+      </ul>
+    </div>
+  </div>
+</div>
